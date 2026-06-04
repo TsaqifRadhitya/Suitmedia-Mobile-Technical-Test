@@ -22,7 +22,6 @@ class FirstPageView extends GetView<FirstPageController> {
           ),
         ),
         child: Form(
-          autovalidateMode: AutovalidateMode.onUserInteractionIfError,
           key: controller.formKey,
           child: Center(
             child: SingleChildScrollView(
