@@ -13,54 +13,58 @@ class SecondPageView extends GetView<SecondPageController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomeAppBar(title: "Second Screen"),
-      body: Padding(
-        padding: EdgeInsetsGeometry.all(24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Welcome",
-                  style: GoogleFonts.poppins(
-                    color: const Color(0xff04021D),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                  ),
-                ),
-                Text(
-                  "Test",
-                  style: GoogleFonts.poppins(
-                    color: const Color(0xff04021D),
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18,
-                  ),
-                ),
-              ],
-            ),
-            Obx(
-              () => Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsetsGeometry.all(24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    controller.selectedUser.value ?? "Selected User Name",
-                    textAlign: TextAlign.center,
+                    "Welcome",
                     style: GoogleFonts.poppins(
                       color: const Color(0xff04021D),
-                      fontWeight: FontWeight.w600,
-                      fontSize: 24,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                    ),
+                  ),
+                  Obx(
+                    () => Text(
+                      controller.name.value,
+                      style: GoogleFonts.poppins(
+                        color: const Color(0xff04021D),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                 ],
               ),
-            ),
-            CustomePrimaryButton(
-              onPressed: controller.handleAChooseUser,
-              label: "Choose a User",
-            ),
-          ],
+              Obx(
+                () => Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      controller.selectedUser.value ?? "Selected User Name",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                        color: const Color(0xff04021D),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              CustomePrimaryButton(
+                onPressed: controller.handleAChooseUser,
+                label: "Choose a User",
+              ),
+            ],
+          ),
         ),
       ),
     );

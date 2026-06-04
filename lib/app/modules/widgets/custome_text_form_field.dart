@@ -5,12 +5,14 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomeTextFormField extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
-  final FormFieldValidator<String?> validator;
+  final FormFieldValidator<String?>? validator;
+  final String? errorText;
   const CustomeTextFormField({
     super.key,
     required this.controller,
     required this.hintText,
-    required this.validator,
+    this.validator,
+    this.errorText,
   });
 
   @override
@@ -22,10 +24,11 @@ class CustomeTextFormField extends StatelessWidget {
         fontWeight: FontWeight.w500,
         color: const Color(0xff6867775C),
       ),
+      controller: controller,
       decoration: InputDecoration(
-        constraints: BoxConstraints(maxHeight: 40),
         hintText: hintText,
         filled: true,
+        errorText: errorText,
         fillColor: Colors.white,
         hintStyle: GoogleFonts.poppins(
           fontSize: 16,

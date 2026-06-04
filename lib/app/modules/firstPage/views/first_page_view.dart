@@ -23,44 +23,61 @@ class FirstPageView extends GetView<FirstPageController> {
         ),
         child: Form(
           autovalidateMode: AutovalidateMode.onUserInteractionIfError,
-          child: Column(
-            spacing: 48,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                "assets/ic_photo.png",
-                width: MediaQuery.of(context).size.width / 3,
+          key: controller.formKey,
+          child: Center(
+            child: SingleChildScrollView(
+              child: Center(
+                child: Column(
+                  spacing: 48,
+                  children: [
+                    Image.asset(
+                      "assets/ic_photo.png",
+                      width: MediaQuery.of(context).size.width / 3,
+                    ),
+                    Column(
+                      spacing: 20,
+                      children: [
+                        CustomeTextFormField(
+                          controller: controller.nameController,
+                          hintText: "Name",
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Please input your name";
+                            }
+                            return null;
+                          },
+                        ),
+                        Obx(
+                          () => CustomeTextFormField(
+                            controller: controller.palindromController,
+                            errorText: controller.isPalindromFiledEmpty.value
+                                ? "Please input palidrom sentence"
+                                : null,
+                            hintText: "Palindrome",
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      spacing: 7.5,
+                      children: [
+                        Obx(
+                          () => CustomePrimaryButton(
+                            onPressed: controller.handlePalindorm,
+                            label: "CHECK",
+                            loading: controller.isLoading.value,
+                          ),
+                        ),
+                        CustomePrimaryButton(
+                          onPressed: controller.handleNext,
+                          label: "NEXT",
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-              Column(
-                spacing: 20,
-                children: [
-                  CustomeTextFormField(
-                    controller: controller.nameController,
-                    hintText: "Name",
-                    validator: controller.validator(Field.name),
-                  ),
-                  CustomeTextFormField(
-                    controller: controller.palindromController,
-                    hintText: "Palindrome",
-                    validator: controller.validator(Field.palindrom),
-                  ),
-                ],
-              ),
-              Column(
-                spacing: 7.5,
-                children: [
-                  CustomePrimaryButton(
-                    onPressed: () {},
-                    label: "CHECK",
-                    loading: true,
-                  ),
-                  CustomePrimaryButton(
-                    onPressed: controller.handleNext,
-                    label: "NEXT",
-                  ),
-                ],
-              ),
-            ],
+            ),
           ),
         ),
       ),
