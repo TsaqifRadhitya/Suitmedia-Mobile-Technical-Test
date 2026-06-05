@@ -23,7 +23,6 @@ class FirstPageController extends GetxController {
 
   void handleNext() {
     if (!(formKey.currentState?.validate() == true)) return;
-    print("Nama : ${nameController.text}");
     Get.toNamed(Routes.SECOND_PAGE, parameters: {'name': nameController.text});
   }
 
@@ -37,7 +36,7 @@ class FirstPageController extends GetxController {
     }
     await Future.delayed(const Duration(milliseconds: 500));
     final sentence = palindromController.text;
-    final cleanSentence = sentence.replaceAll(RegExp(r'\s+'), '').toLowerCase();
+    final cleanSentence = sentence.trim().toLowerCase();
     final isPalindrome =
         cleanSentence.isNotEmpty &&
         cleanSentence == cleanSentence.split("").reversed.join("");
@@ -45,7 +44,7 @@ class FirstPageController extends GetxController {
     Get.snackbar(
       "Palindrome Result",
       isPalindrome ? "isPalindrome" : "not palindrome",
-      snackPosition: SnackPosition.BOTTOM,
+      snackPosition: SnackPosition.TOP,
       backgroundColor: isPalindrome
           ? const Color(0xff2E7D32)
           : const Color(0xffC62828),
